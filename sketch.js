@@ -8,40 +8,41 @@ function preload()
 }
 
 function setup() {
-	createCanvas(500, 500);
+  createCanvas(500, 500);
+  database = firebase.database();
   dog = createSprite(250,250,20,20)
-  dog.addImage("Dog")
+  dog.addImage(Dog)
+  dog.scale = 0.5;
   foodStock = database.ref('Food')
-  foodStock.on("Value", readStock)
+  foodStock.on("value", readStock)
 }
 
 
 function draw() {  
 background(46,139,87)
-if(keyWentDown(UP_ARROW)){
+if(keyDown(UP_ARROW)){
   writeStock(foodS)
   dog.addImage(happyDog)
 }
   drawSprites();
   //add styles here
-
+  textSize(25);
+  fill("black")
+  text("Use the up arrow key to feed Tango", 100, 40)
 }
-text("foodStock", 50,20)
-textSize(20)
-
 //Function to read values from DB
 function readStock(data){
-  if(x<=0){
-    x=0;
-  }else{
-    x=x-1;
-  }
-  foodS-data.val();
+  foodS=data.val();
 }
 
-//Function to write vlaues in DB
+//Function to write values in DB
 function writeStock(x){
 
+  if(x<= 0){
+    x= 0;
+  }else{
+    x= x-1;
+  }
     database.ref('/').update({
       Food:x
     })
