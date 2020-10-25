@@ -41,10 +41,9 @@ fedTime.on("value",function(data){
 })
   drawSprites();
   //add styles here
-  Display();
   textSize(25);
   fill("black")
-  text("Use the up arrow key to feed Tango", 100, 40)
+  text("Use the up arrow key to feed Tango", 70, 450)
   fill(255,255,254)
   textSize(15);
   if(lastFed>=12){
